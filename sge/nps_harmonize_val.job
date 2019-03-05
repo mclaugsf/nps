@@ -147,7 +147,7 @@ M_FLIP=`cat $OUT_PREFIX.allele_flip | wc -l`
 if [ $M_FLIP -gt 0 ]; then 
     echo "ERROR: allele flips at $M_FLIP SNPs"
     echo "See $OUT_PREFIX.allele_flip"
-    exit 1
+    #exit 1 #mclaugsf: keep ERROR as warning message, but don't exit.
 fi
 
 if [ $lines -lt $total ]; then
