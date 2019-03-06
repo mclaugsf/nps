@@ -141,13 +141,13 @@ if (nrow(vlphen) <= 1) {
     stop("Invalid validation cohort size: N=", nrow(vlphen))
 }
 
-if (sum(vlphen$Outcome == 1) <= 1) {
-    stop("Too few cases")
-}
+#if (sum(vlphen$Outcome == 1) <= 1) {
+#    stop("Too few cases")
+#}
 
-if (sum(vlphen$Outcome == 0) <= 1) {
-    stop("Too few controls")
-}
+#if (sum(vlphen$Outcome == 0) <= 1) {
+#    stop("Too few controls")
+#}
 
 # genetic risks
 for (WINSHIFT in list.WINSHIFT) {
@@ -230,17 +230,25 @@ prisk <- prisk[vlY >= 0]
 vlL <- vlphen$TotalLiability[vlY >= 0]	
 vlY <- vlY[vlY >= 0]
 
-if (cor(vlY, prisk) < 0) {
-    cat("WARNING: auto-correct sign flip: ", cor(vlY, prisk), "\n")
+cat(prisk)
+cat("\n")
+cat(vlY)
+cat("\n")
+cat(cor(vlY,prisk))
+cat("\n")
 
-    prisk <- - prisk
-}
+#if (cor(vlY, prisk) < 0) {
+#    cat("WARNING: auto-correct sign flip: ", cor(vlY, prisk), "\n")
+#
+#    prisk <- - prisk
+#}
 
 filename <- paste(valphenofile, ".nps_score", sep='')
 df.out <- cbind(vlphen[vlphen$Outcome >= 0, ], Score=prisk)
 write.table(df.out, file=filename,
             row.names=FALSE, col.names=TRUE, sep="\t", quote=FALSE)
 cat("OK (saved in", filename, ")\n")
+quit()
 
 cat("Observed-scale R2 =", cor(vlY, prisk)**2, "\n")
 
