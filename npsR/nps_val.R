@@ -22,16 +22,20 @@ ASSERT <- function(test) {
 
 cargs <- commandArgs(trailingOnly=TRUE)
 
-if (length(cargs) < 5) {
-    stop("Usage: Rscript nps_val.R <work dir> <val dir> <val fam file> <val pheno file> [<WINSHIFT>]+...")
+#if (length(cargs) < 5) {
+if (length(cargs) < 7) {
+#    stop("Usage: Rscript nps_val.R <work dir> <val dir> <val fam file> <val pheno file> [<WINSHIFT>]+...")
+    stop("Usage: Rscript nps_val.R <work dir> <val dir> <val fam file> <val pheno file> <traintag> <window size> [<WINSHIFT>]+...")
 }
 
 tempprefix <- paste(cargs[1], "/", sep='')
 
-args <- readRDS(paste(tempprefix, "args.RDS", sep=''))
+#args <- readRDS(paste(tempprefix, "args.RDS", sep=''))
 
-traintag <- args[["traintag"]]
-WINSZ <- args[["WINSZ"]]
+#traintag <- args[["traintag"]]
+traintag <- cargs[5]
+#WINSZ <- args[["WINSZ"]]
+WINSZ <- cargs[6]
 
 valdir <- cargs[2]
 valfamfile <- cargs[3]
@@ -39,7 +43,7 @@ valphenofile <- cargs[4]
 
 list.WINSHIFT <- c() 
 
-for (carg.WSHIFT in cargs[5:length(cargs)]) {
+for (carg.WSHIFT in cargs[7:length(cargs)]) {
 
     WSHIFT <- as.numeric(carg.WSHIFT)
 
