@@ -137,9 +137,9 @@ if ("TotalLiability" %in% colnames(vlphen)) {
     cat("Includes TotalLiability\n")
 }
 
-if (nrow(vlphen) <= 1) {
-    stop("Invalid validation cohort size: N=", nrow(vlphen))
-}
+#if (nrow(vlphen) <= 1) {
+#    stop("Invalid validation cohort size: N=", nrow(vlphen))
+#}
 
 #if (sum(vlphen$Outcome == 1) <= 1) {
 #    stop("Too few cases")
